@@ -13,16 +13,16 @@ subtest "can glitch png file", sub {
     my $path = File::Spec->catfile($data_dir, "test.png");
     my $data = read_file($path);
     my $glitched = $ig->glitch_file($path);
-    is $ig->_detect_format($glitched), "image/x-png", "glitched png must be png";
-    ok $glitched ne $data, "glitched png must be GLITCHED :)";
+    is $glitched->file_type, "image/x-png", "glitched png must be png";
+    ok $glitched->as_bin ne $data, "glitched png must be GLITCHED :)";
 };
 
 subtest "can glitch jpeg file", sub {
     my $path = File::Spec->catfile($data_dir, "test.jpg");
     my $data = read_file($path);
     my $glitched = $ig->glitch_file($path);
-    is $ig->_detect_format($glitched), "image/jpeg", "glitched png must be jpeg";
-    ok $glitched ne $data, "glitched jpeg must be GLITCHED :)";
+    is $glitched->file_type, "image/jpeg", "glitched png must be jpeg";
+    ok $glitched->as_bin ne $data, "glitched jpeg must be GLITCHED :)";
 };
 
 done_testing;

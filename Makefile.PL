@@ -13,7 +13,7 @@ author_tests 'xt';
 
 test_requires 'Test::More';
 test_requires 'FindBin';
-
+test_requires 'File::Temp';
 test_requires 'File::Spec';
 
 auto_set_repository;

@@ -4,6 +4,7 @@ use warnings;
 use File::Type;
 use File::Slurp;
 use Carp;
+use Image::Glitch::GlitchedImage;
 use UNIVERSAL::require;
 our $VERSION = '0.01';
 
@@ -31,7 +32,9 @@ sub glitch{
 
     my $glitcher = $supported_formats->{$file_type};
     $glitcher->require;
-    return $glitcher->glitch($data);
+    my $glitched_data = $glitcher->glitch($data);
+
+    return Image::Glitch::GlitchedImage->new($glitched_data,$file_type);
 }
 
 sub _detect_format{
@@ -46,21 +49,36 @@ __END__
 
 =head1 NAME
 
-Image::Glitch -
+Image::Glitch - Glitch your image file
 
 =head1 SYNOPSIS
 
   use Image::Glitch;
 
+  # get glitched image object from binary data
+  my $ig = Image::Glitch->new;
+  my $glitched = $ig->glitch($data);
+
+  # or you can get it by file path
+  # $glitched = $ig->glitch_file($path_to_image_file);
+
+  $glitched->as_bin; # returns glitched binary data
+  $glitched->file_type # returns file type (e.g., image/x-png or image/jpeg)
+  $glitched->write($path); # save image to disk
+
+
 =head1 DESCRIPTION
 
-Image::Glitch is
+Image::Glitch is a perl module that makes images cooooool by destroying image data. It emulate aging of image files.
 
 =head1 AUTHOR
 
 Shinpei Maruyama E<lt>shinpeim {at} gmail.comE<gt>
 
 =head1 SEE ALSO
+
+L<http://glitch.so/>
+L<http://makebooth.com/i/Tj1Cy>
 
 =head1 LICENSE
 

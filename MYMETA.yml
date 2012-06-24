@@ -1,5 +1,5 @@
 ---
-abstract: unknown
+abstract: 'Glitch your image file'
 author:
   - 'Shinpei Maruyama <shinpeim {at} gmail.com>'
 build_requires:
@@ -26,4 +26,5 @@ requires:
   UNIVERSAL::require: 0
 resources:
   license: http://dev.perl.org/licenses/
+  repository: git://github.com/Shinpeim/Image-Glitch.git
 version: 0.01
