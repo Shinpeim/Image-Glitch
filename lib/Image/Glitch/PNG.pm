@@ -18,8 +18,12 @@ sub glitch{
     my $x = Compress::Raw::Zlib::Inflate->new;
     $x->inflate($parsed_data->{body}, my $raw);
 
-    my $from = $alnums->[int rand(scalar @$alnums)];
-    my $to   = $alnums->[int rand(scalar @$alnums)];
+    my ($from,$to);
+    do {
+        $from = $alnums->[int rand(scalar @$alnums)];
+        $to   = $alnums->[int rand(scalar @$alnums)];
+    } while ($from eq $to);
+
     $raw =~ s/$from/$to/g;
 
     my $d = Compress::Raw::Zlib::Deflate->new(

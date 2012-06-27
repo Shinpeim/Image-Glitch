@@ -10,8 +10,13 @@ my $alnums = [qw/
 
 sub glitch{
     my ($class, $data) = @_;
-    my $from = $alnums->[int rand(scalar @$alnums)];
-    my $to   = $alnums->[int rand(scalar @$alnums)];
+
+    my ($from,$to);
+    do {
+        $from = $alnums->[int rand(scalar @$alnums)];
+        $to   = $alnums->[int rand(scalar @$alnums)];
+    } while ($from eq $to);
+
     $data =~ s/$from/$to/g;
     return $data;
 }
